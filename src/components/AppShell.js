@@ -43,7 +43,7 @@ export function AppShell({ router, store }) {
       el(
         "div",
         { class: "footer-inner" },
-        el("small", {}, "Parkwise — mock frontend (vanilla JS)."),
+        // el("small", {}, "Parkwise — mock frontend (vanilla JS)."),
         el("small", { class: "mono" }, `User: ${store.getState().session.userId}`),
       ),
     ),

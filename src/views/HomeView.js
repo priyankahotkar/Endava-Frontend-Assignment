@@ -52,7 +52,6 @@ export function HomeView({ api, store, toastHost }) {
         "div",
         { class: "section-head" },
         el("h2", { class: "section-title" }, "Start here"),
-        el("p", { class: "section-sub" }, "A few common actions wired to fake data."),
       ),
       el(
         "div",

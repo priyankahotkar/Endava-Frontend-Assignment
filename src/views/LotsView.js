@@ -18,7 +18,7 @@ export function LotsView({ api, store, toastHost }) {
       value: filters.query || "",
       type: "search",
     });
-    const openNow = el("input", { type: "checkbox", id: "openNow", checked: !!filters.openNow });
+    const openNow = el("input", { type: "checkbox", id: "open-now", checked: !!filters.openNow });
     const maxPrice = el("input", { class: "control", placeholder: "Max hourly rate", value: filters.maxPrice ?? "", inputmode: "decimal" });
 
     const toolbar = el(
@@ -31,7 +31,7 @@ export function LotsView({ api, store, toastHost }) {
         el(
           "div",
           { class: "field" },
-          el("label", { for: "openNow" }, "Open now"),
+          el("label", { for: "open-now" }, "Open now"),
           el("div", { style: { display: "flex", alignItems: "center", gap: "10px", padding: "10px 0" } }, openNow, el("span", { class: "card-meta" }, "Only show lots open right now")),
         ),
         el("div", { class: "field", style: { width: "180px" } }, el("label", {}, "Max price"), maxPrice),
