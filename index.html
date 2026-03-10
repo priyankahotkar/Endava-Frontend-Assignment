@@ -4,23 +4,133 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
-    <title>Parkwise — Parking Booking</title>
+    <title>Home — Parkwise</title>
     <meta
       name="description"
       content="A clean, extensible parking booking frontend with mock APIs."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@500;650;700&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div id="app"></div>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container">
+          <div class="topbar-inner">
+            <a class="brand" href="./index.html">
+              <span class="brand-mark" aria-hidden="true"></span>
+              <span>Parkwise</span>
+            </a>
 
-    <noscript>
-      <div class="noscript">
-        This app requires JavaScript enabled.
-      </div>
-    </noscript>
+            <nav class="nav" aria-label="Primary">
+              <a href="./index.html" aria-current="page">Home</a>
+              <a href="./lots.html">Lots</a>
+              <a href="./bookings.html">Bookings</a>
+              <a href="./vehicles.html">Vehicles</a>
+              <a href="./billing.html">Billing</a>
+            </nav>
+          </div>
+        </div>
+      </header>
 
-    <script type="module" src="./index.js"></script>
+      <main id="main">
+        <section class="hero">
+          <div class="container">
+            <div class="hero-grid">
+              <div class="hero-card">
+                <h1>Make the move from parking to peace.</h1>
+                <p>
+                  Find parking near your destination, keep track of bookings, and stay on top of payments.
+                  Designed as a clean, static multi-page experience.
+                </p>
+                <div class="pill-row" aria-label="Highlights">
+                  <span class="pill"><span class="dot dot--success" aria-hidden="true"></span> Clean UI</span>
+                  <span class="pill"><span class="dot dot--warning" aria-hidden="true"></span> Multi-page</span>
+                  <span class="pill"><span class="dot dot--danger" aria-hidden="true"></span> No JavaScript</span>
+                </div>
+                <div class="card-row">
+                  <a class="btn btn--primary" href="./lots.html">Browse parking lots</a>
+                  <a class="btn btn--ghost" href="./bookings.html">View my bookings</a>
+                </div>
+              </div>
+
+              <div class="hero-media" aria-label="Hero illustration">
+                <img
+                  src="https://images.unsplash.com/photo-1768796372362-05c256e61d8c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="People working in a modern office"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <h2 class="section-title">Start here</h2>
+              <p class="section-sub">Pick a section to explore.</p>
+            </div>
+
+            <div class="grid">
+              <div class="card" style="grid-column: span 4;">
+                <div class="card-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1622836270623-0a8072ed6eec?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8UGFya2luZyUyMGdhcmFnZXxlbnwwfHwwfHx8MA%3D%3D"
+                    alt="Parking garage"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="card-body">
+                  <div class="card-title">Parking lots</div>
+                  <p class="card-meta">Browse lots and open a lot details page.</p>
+                  <div class="card-row">
+                    <a class="btn btn--small btn--primary" href="./lots.html">Go to lots</a>
+                    <span class="badge badge--success">Available</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" style="grid-column: span 4;">
+                <div class="card-body">
+                  <div class="card-title">Bookings</div>
+                  <p class="card-meta">A simple table of your recent reservations.</p>
+                  <div class="card-row">
+                    <a class="btn btn--small btn--primary" href="./bookings.html">Go to bookings</a>
+                    <!-- <span class="badge badge--warning">Mock data</span> -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" style="grid-column: span 4;">
+                <div class="card-body">
+                  <div class="card-title">Billing</div>
+                  <p class="card-meta">Payments and invoices overview.</p>
+                  <div class="card-row">
+                    <a class="btn btn--small btn--primary" href="./billing.html">Go to billing</a>
+                    <!-- <span class="badge badge--warning">Mock data</span> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-inner">
+            <small>Parkwise</small>
+            <small class="mono">User: demo-user</small>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

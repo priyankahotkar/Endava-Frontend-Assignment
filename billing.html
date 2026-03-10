@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Billing — Parkwise</title>
+    <meta name="description" content="Payments and invoices." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@500;650;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container">
+          <div class="topbar-inner">
+            <a class="brand" href="./index.html">
+              <span class="brand-mark" aria-hidden="true"></span>
+              <span>Parkwise</span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+              <a href="./index.html">Home</a>
+              <a href="./lots.html">Lots</a>
+              <a href="./bookings.html">Bookings</a>
+              <a href="./vehicles.html">Vehicles</a>
+              <a href="./billing.html" aria-current="page">Billing</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="page-hero">
+          <div class="container">
+            <div class="page-hero-card">
+              <h1 class="page-hero-title">Payments &amp; invoices</h1>
+              <p class="page-hero-sub">Stay in the loop with invoice status and payment summaries.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <h1 class="section-title">Payments &amp; invoices</h1>
+              <p class="section-sub">Static sample data.</p>
+            </div>
+
+            <div class="toolbar">
+              <div class="toolbar-left">
+                <span class="badge badge--success">Up to date</span>
+              </div>
+              <div class="toolbar-right">
+                <a class="btn btn--ghost" href="./bookings.html">View bookings</a>
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="card" style="grid-column: span 8;">
+                <div class="card-body">
+                  <h2 class="card-title">Invoices</h2>
+                  <p class="card-meta">A few recent invoices (mock).</p>
+                  <table class="table" aria-label="Invoices table">
+                    <thead>
+                      <tr>
+                        <th>Invoice</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mono">INV-2026-0310</td>
+                        <td>Mar 10</td>
+                        <td>$10.50</td>
+                        <td><span class="badge badge--success">Paid</span></td>
+                      </tr>
+                      <tr>
+                        <td class="mono">INV-2026-0302</td>
+                        <td>Mar 02</td>
+                        <td>$12.00</td>
+                        <td><span class="badge badge--success">Paid</span></td>
+                      </tr>
+                      <tr>
+                        <td class="mono">INV-2026-0223</td>
+                        <td>Feb 23</td>
+                        <td>$36.00</td>
+                        <td><span class="badge badge--warning">Pending</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="card" style="grid-column: span 4;">
+                <div class="card-body">
+                  <h2 class="card-title">Payment method</h2>
+                  <p class="card-meta">Shown for layout only.</p>
+                  <div class="empty">
+                    <div style="font-weight: 800;">Card ending 4242</div>
+                    <div>Expires 09/28</div>
+                  </div>
+                  <div class="card-row">
+                    <button class="btn btn--block btn--primary" type="button" disabled>Update method</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-inner">
+            <small>Parkwise</small>
+            <small class="mono">User: demo-user</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

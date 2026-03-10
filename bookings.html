@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Bookings — Parkwise</title>
+    <meta name="description" content="Your bookings." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@500;650;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container">
+          <div class="topbar-inner">
+            <a class="brand" href="./index.html">
+              <span class="brand-mark" aria-hidden="true"></span>
+              <span>Parkwise</span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+              <a href="./index.html">Home</a>
+              <a href="./lots.html">Lots</a>
+              <a href="./bookings.html" aria-current="page">Bookings</a>
+              <a href="./vehicles.html">Vehicles</a>
+              <a href="./billing.html">Billing</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="page-hero">
+          <div class="container">
+            <div class="page-hero-card">
+              <h1 class="page-hero-title">My bookings</h1>
+              <p class="page-hero-sub">Review your reservations at a glance and keep your plan on track.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <h1 class="section-title">My bookings</h1>
+              <p class="section-sub">Static sample history.</p>
+            </div>
+
+            <div class="toolbar">
+              <div class="toolbar-left">
+                <span class="badge badge--success">1 active</span>
+                <span class="badge badge--warning">2 past</span>
+              </div>
+              <div class="toolbar-right">
+                <a class="btn btn--primary" href="./lots.html">Find a lot</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <table class="table" aria-label="Bookings table">
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Lot</th>
+                      <th>Vehicle</th>
+                      <th>Start</th>
+                      <th>End</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="badge badge--success">Active</span></td>
+                      <td>Central Plaza Garage</td>
+                      <td class="mono">AB-123-CD</td>
+                      <td>Today 10:00</td>
+                      <td>Today 13:00</td>
+                      <td>$10.50</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge--warning">Past</span></td>
+                      <td>Riverside Lot</td>
+                      <td class="mono">XY-900-ZZ</td>
+                      <td>Mar 02 09:30</td>
+                      <td>Mar 02 17:00</td>
+                      <td>$12.00</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge--warning">Past</span></td>
+                      <td>Airport Long Stay</td>
+                      <td class="mono">AB-123-CD</td>
+                      <td>Feb 21 05:15</td>
+                      <td>Feb 23 08:10</td>
+                      <td>$36.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="section-head" style="margin-top: 18px;">
+              <h2 class="section-title">Actions</h2>
+              <!-- <p class="section-sub">Disabled in static mode.</p> -->
+            </div>
+            <div class="grid">
+              <div class="card" style="grid-column: span 6;">
+                <div class="card-body">
+                  <h3 class="card-title">Extend booking</h3>
+                  <p class="card-meta">Add time to your active booking.</p>
+                  <button class="btn btn--block btn--ghost" type="button" disabled>Extend</button>
+                </div>
+              </div>
+              <div class="card" style="grid-column: span 6;">
+                <div class="card-body">
+                  <h3 class="card-title">Cancel booking</h3>
+                  <p class="card-meta">Cancellation rules vary by lot.</p>
+                  <button class="btn btn--block btn--danger" type="button" disabled>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-inner">
+            <small>Parkwise</small>
+            <small class="mono">User: demo-user</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

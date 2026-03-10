@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Vehicles — Parkwise</title>
+    <meta name="description" content="Your vehicles." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@500;650;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container">
+          <div class="topbar-inner">
+            <a class="brand" href="./index.html">
+              <span class="brand-mark" aria-hidden="true"></span>
+              <span>Parkwise</span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+              <a href="./index.html">Home</a>
+              <a href="./lots.html">Lots</a>
+              <a href="./bookings.html">Bookings</a>
+              <a href="./vehicles.html" aria-current="page">Vehicles</a>
+              <a href="./billing.html">Billing</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="page-hero">
+          <div class="container">
+            <div class="page-hero-card">
+              <h1 class="page-hero-title">Vehicles</h1>
+              <p class="page-hero-sub">Save your vehicles so booking a spot is frictionless. (Static demo.)</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <h1 class="section-title">Vehicles</h1>
+              <p class="section-sub">Static sample list and form.</p>
+            </div>
+
+            <div class="grid">
+              <div class="card" style="grid-column: span 7;">
+                <div class="card-body">
+                  <h2 class="card-title">Saved vehicles</h2>
+                  <p class="card-meta">Use these when booking a lot.</p>
+                  <div class="pill-row">
+                    <span class="pill"><span class="dot dot--success" aria-hidden="true"></span> Primary</span>
+                    <span class="pill"><span class="dot dot--warning" aria-hidden="true"></span> Guest</span>
+                  </div>
+
+                  <table class="table" aria-label="Vehicles table">
+                    <thead>
+                      <tr>
+                        <th>Plate</th>
+                        <th>Nickname</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mono">AB-123-CD</td>
+                        <td>Daily</td>
+                        <td>Sedan</td>
+                        <td><span class="badge badge--success">Default</span></td>
+                      </tr>
+                      <tr>
+                        <td class="mono">XY-900-ZZ</td>
+                        <td>Weekend</td>
+                        <td>SUV</td>
+                        <td><span class="badge badge--warning">Secondary</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="card" style="grid-column: span 5;">
+                <div class="card-body">
+                  <h2 class="card-title">Add vehicle</h2>
+                  <p class="card-meta">Form is present, but submit is disabled.</p>
+                  <form class="form">
+                    <div class="field">
+                      <label for="plate">Plate number</label>
+                      <input id="plate" class="control" type="text" placeholder="AB-123-CD" />
+                    </div>
+                    <div class="form-row">
+                      <div class="field">
+                        <label for="nickname">Nickname</label>
+                        <input id="nickname" class="control" type="text" placeholder="Daily" />
+                      </div>
+                      <div class="field">
+                        <label for="type">Type</label>
+                        <select id="type" class="control">
+                          <option>Sedan</option>
+                          <option>SUV</option>
+                          <option>Hatchback</option>
+                          <option>Motorcycle</option>
+                        </select>
+                      </div>
+                    </div>
+                    <button class="btn btn--block btn--primary" type="button" disabled>Add vehicle</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-inner">
+            <small>Parkwise</small>
+            <small class="mono">User: demo-user</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
