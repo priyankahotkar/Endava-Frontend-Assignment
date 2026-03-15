@@ -65,68 +65,73 @@
               <div class="toolbar-left">
                 <span class="badge badge--success">Open now</span>
                 <span class="badge badge--warning">Limited spaces</span>
+                <button type="button" class="btn btn--small btn--ghost" data-action="use-location">Use my location</button>
               </div>
               <div class="toolbar-right">
-                <a class="btn btn--small btn--ghost" href="./lot-details.html">View a lot details page</a>
+                <a class="btn btn--small btn--ghost" href="./lot-details.html">View lot details</a>
               </div>
             </div>
 
-            <div class="grid">
-              <article class="card" style="grid-column: span 6;">
+            <div class="grid" data-lots-grid>
+              <article class="card lot-card" style="grid-column: span 6;" data-lot-id="central-plaza" data-lot-name="Central Plaza Garage" data-lat="12.9716" data-lng="77.5946" data-rate-hour="3.5" data-rate-day="24" data-address="0.8 km · Covered · EV charging">
                 <div class="card-body">
                   <h2 class="card-title">Central Plaza Garage</h2>
-                  <p class="card-meta">0.8 km · Covered · EV charging</p>
+                  <p class="card-meta" data-distance-label>0.8 km · Covered · EV charging</p>
                   <div class="pill-row">
                     <span class="pill"><span class="dot dot--success" aria-hidden="true"></span> 18 spots</span>
                     <span class="pill"><span class="dot dot--warning" aria-hidden="true"></span> Peak pricing</span>
                   </div>
                   <div class="card-row">
-                    <a class="btn btn--primary" href="./lot-details.html">View details</a>
+                    <a class="btn btn--primary" href="./slot-selection.html" data-action="book-here">Book here</a>
+                    <a class="btn btn--ghost" href="./lot-details.html">View details</a>
                     <span class="mono">$3.50/hr</span>
                   </div>
                 </div>
               </article>
 
-              <article class="card" style="grid-column: span 6;">
+              <article class="card lot-card" style="grid-column: span 6;" data-lot-id="riverside" data-lot-name="Riverside Lot" data-lat="12.9352" data-lng="77.6245" data-rate-hour="2" data-rate-day="12" data-address="2.1 km · Outdoor · Accessible">
                 <div class="card-body">
                   <h2 class="card-title">Riverside Lot</h2>
-                  <p class="card-meta">2.1 km · Outdoor · Accessible</p>
+                  <p class="card-meta" data-distance-label>2.1 km · Outdoor · Accessible</p>
                   <div class="pill-row">
                     <span class="pill"><span class="dot dot--success" aria-hidden="true"></span> 42 spots</span>
                     <span class="pill"><span class="dot dot--success" aria-hidden="true"></span> Flat rate</span>
                   </div>
                   <div class="card-row">
-                    <a class="btn btn--primary" href="./lot-details.html">View details</a>
+                    <a class="btn btn--primary" href="./slot-selection.html" data-action="book-here">Book here</a>
+                    <a class="btn btn--ghost" href="./lot-details.html">View details</a>
                     <span class="mono">$12/day</span>
                   </div>
                 </div>
               </article>
 
-              <article class="card" style="grid-column: span 6;">
+              <article class="card lot-card" style="grid-column: span 6;" data-lot-id="old-town" data-lot-name="Old Town Street Parking" data-lat="12.9654" data-lng="77.6012" data-rate-hour="2" data-rate-day="" data-address="1.6 km · Street · Metered">
                 <div class="card-body">
                   <h2 class="card-title">Old Town Street Parking</h2>
-                  <p class="card-meta">1.6 km · Street · Metered</p>
+                  <p class="card-meta" data-distance-label>1.6 km · Street · Metered</p>
                   <div class="pill-row">
                     <span class="pill"><span class="dot dot--warning" aria-hidden="true"></span> Varies</span>
                     <span class="pill"><span class="dot dot--danger" aria-hidden="true"></span> Time limits</span>
                   </div>
                   <div class="card-row">
-                    <a class="btn btn--primary" href="./lot-details.html">View details</a>
+                    <a class="btn btn--primary" href="./slot-selection.html" data-action="book-here">Book here</a>
+                    <a class="btn btn--ghost" href="./lot-details.html">View details</a>
                     <span class="mono">$2/hr</span>
                   </div>
                 </div>
               </article>
 
-              <article class="card" style="grid-column: span 6;">
+              <article class="card lot-card" style="grid-column: span 6;" data-lot-id="airport" data-lot-name="Airport Long Stay" data-lat="13.1989" data-lng="77.7068" data-rate-hour="4" data-rate-day="18" data-address="7.4 km · Shuttle · 24/7">
                 <div class="card-body">
                   <h2 class="card-title">Airport Long Stay</h2>
-                  <p class="card-meta">7.4 km · Shuttle · 24/7</p>
+                  <p class="card-meta" data-distance-label>7.4 km · Shuttle · 24/7</p>
                   <div class="pill-row">
                     <span class="pill"><span class="dot dot--success" aria-hidden="true"></span> 120 spots</span>
                     <span class="pill"><span class="dot dot--warning" aria-hidden="true"></span> Weekend surge</span>
                   </div>
                   <div class="card-row">
-                    <a class="btn btn--primary" href="./lot-details.html">View details</a>
+                    <a class="btn btn--primary" href="./slot-selection.html" data-action="book-here">Book here</a>
+                    <a class="btn btn--ghost" href="./lot-details.html">View details</a>
                     <span class="mono">$18/day</span>
                   </div>
                 </div>
@@ -145,5 +150,6 @@
         </div>
       </footer>
     </div>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

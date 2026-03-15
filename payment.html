@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Pay — Parkwise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@500;650;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container">
+          <div class="topbar-inner">
+            <a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true"></span><span>Parkwise</span></a>
+            <nav class="nav" aria-label="Primary">
+              <a href="./index.html">Home</a>
+              <a href="./lots.html">Lots</a>
+              <a href="./bookings.html">Bookings</a>
+              <a href="./vehicles.html">Vehicles</a>
+              <a href="./billing.html">Billing</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="section">
+          <div class="container">
+            <p class="section-sub"><a href="./slot-selection.html" class="btn btn--small btn--ghost">← Back to slot</a></p>
+            <div class="payment-layout">
+              <div class="card payment-order">
+                <div class="card-body">
+                  <h2 class="card-title">Order summary</h2>
+                  <dl class="payment-summary">
+                    <dt>Parking lot</dt>
+                    <dd id="pay-lot-name">—</dd>
+                    <dt>Slot</dt>
+                    <dd id="pay-slot-detail">—</dd>
+                    <dt>Duration</dt>
+                    <dd id="pay-duration">—</dd>
+                    <dt class="payment-total">Amount to pay</dt>
+                    <dd class="payment-total mono" id="pay-amount">$0.00</dd>
+                  </dl>
+                </div>
+              </div>
+
+              <div class="card payment-form-card">
+                <div class="card-body">
+                  <h2 class="card-title">Secure payment</h2>
+                  <p class="card-meta">Enter your card details. This is a demo — no real charges.</p>
+                  <form class="form" data-payment-form id="payment-form">
+                    <div class="field">
+                      <label for="pay-card-number">Card number</label>
+                      <input id="pay-card-number" name="cardNumber" class="control" type="text" inputmode="numeric" placeholder="4111 1111 1111 1111" maxlength="19" required />
+                    </div>
+                    <div class="form-row">
+                      <div class="field">
+                        <label for="pay-expiry">Expiry (MM/YY)</label>
+                        <input id="pay-expiry" name="expiry" class="control" type="text" placeholder="MM/YY" maxlength="5" required />
+                      </div>
+                      <div class="field">
+                        <label for="pay-cvv">CVV</label>
+                        <input id="pay-cvv" name="cvv" class="control" type="text" inputmode="numeric" placeholder="123" maxlength="4" required />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="pay-name">Name on card</label>
+                      <input id="pay-name" name="name" class="control" type="text" placeholder="John Doe" required />
+                    </div>
+                    <button type="submit" class="btn btn--block btn--primary" id="pay-button">Pay now</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-inner">
+            <small>Parkwise</small>
+            <small class="mono">User: demo-user</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/payment.js"></script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+const BOOKINGS_KEY = "parkwise_bookings";
+const SEED_BOOKINGS = [
+  { id: "b1", lotName: "Central Plaza Garage", slotType: "Car", slotNumber: "A-03", vehiclePlate: "AB-123-CD", start: "Today 10:00", end: "Today 13:00", total: "$10.50", status: "Active" },
+  { id: "b2", lotName: "Riverside Lot", slotType: "Car", slotNumber: "P-12", vehiclePlate: "XY-900-ZZ", start: "Mar 02 09:30", end: "Mar 02 17:00", total: "$12.00", status: "Past" },
+  { id: "b3", lotName: "Airport Long Stay", slotType: "Car", slotNumber: "L-08", vehiclePlate: "AB-123-CD", start: "Feb 21 05:15", end: "Feb 23 08:10", total: "$36.00", status: "Past" },
+];
+
+export function getBookings() {
+  try {
+    const raw = localStorage.getItem(BOOKINGS_KEY);
+    if (!raw) return [...SEED_BOOKINGS];
+    const list = JSON.parse(raw);
+    return Array.isArray(list) ? list : [...SEED_BOOKINGS];
+  } catch {
+    return [...SEED_BOOKINGS];
+  }
+}
+
+export function saveBookings(list) {
+  localStorage.setItem(BOOKINGS_KEY, JSON.stringify(list));
+}
+
+export function addBooking(booking) {
+  const list = getBookings();
+  const id = "b" + Date.now();
+  list.unshift({ ...booking, id, status: "Active" });
+  saveBookings(list);
+  return id;
+}
+
+export function updateBookingById(id, updates) {
+  const list = getBookings();
+  const i = list.findIndex((b) => b.id === id);
+  if (i === -1) return;
+  list[i] = { ...list[i], ...updates };
+  saveBookings(list);
+}
+
+const SELECTED_LOT_KEY = "parkwise_selected_lot";
+const SELECTED_SLOT_KEY = "parkwise_selected_slot";
+
+export function getSelectedLot() {
+  try {
+    const raw = sessionStorage.getItem(SELECTED_LOT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function setSelectedLot(lot) {
+  sessionStorage.setItem(SELECTED_LOT_KEY, JSON.stringify(lot));
+}
+
+export function getSelectedSlot() {
+  try {
+    const raw = sessionStorage.getItem(SELECTED_SLOT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function setSelectedSlot(slot) {
+  sessionStorage.setItem(SELECTED_SLOT_KEY, JSON.stringify(slot));
+}
+
+export function clearBookingDraft() {
+  sessionStorage.removeItem(SELECTED_LOT_KEY);
+  sessionStorage.removeItem(SELECTED_SLOT_KEY);
+}

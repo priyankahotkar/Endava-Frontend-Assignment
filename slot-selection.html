@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Choose slot — Parkwise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@500;650;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container">
+          <div class="topbar-inner">
+            <a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true"></span><span>Parkwise</span></a>
+            <nav class="nav" aria-label="Primary">
+              <a href="./index.html">Home</a>
+              <a href="./lots.html">Lots</a>
+              <a href="./bookings.html">Bookings</a>
+              <a href="./vehicles.html">Vehicles</a>
+              <a href="./billing.html">Billing</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="section">
+          <div class="container">
+            <p class="section-sub"><a href="./lots.html" class="btn btn--small btn--ghost">← Back to lots</a></p>
+            <div class="section-head">
+              <h1 class="section-title" id="slot-selection-lot-name">Choose slot</h1>
+              <p class="section-sub" id="slot-selection-lot-address"></p>
+            </div>
+
+            <div class="card" style="margin-bottom: 18px;">
+              <div class="card-body">
+                <h2 class="card-title">Vehicle type</h2>
+                <div class="pill-row" data-vehicle-types role="tablist">
+                  <button type="button" class="pill slot-type-btn" data-vehicle-type="Car" role="tab" aria-selected="true">Car</button>
+                  <button type="button" class="pill slot-type-btn" data-vehicle-type="Bike" role="tab" aria-selected="false">Bike</button>
+                  <button type="button" class="pill slot-type-btn" data-vehicle-type="EV" role="tab" aria-selected="false">EV</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 18px;">
+              <div class="card-body">
+                <h2 class="card-title">Available slots</h2>
+                <p class="card-meta">Select a slot for your vehicle type.</p>
+                <div class="slot-grid" data-slot-list aria-label="Available slots"></div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 18px;">
+              <div class="card-body">
+                <h2 class="card-title">Duration &amp; fare</h2>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="duration">Hours</label>
+                    <select id="duration" name="duration" class="control" data-duration-select>
+                      <option value="1">1 hour</option>
+                      <option value="2">2 hours</option>
+                      <option value="3" selected>3 hours</option>
+                      <option value="4">4 hours</option>
+                      <option value="8">8 hours</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label>Total fare</label>
+                    <div class="mono" style="font-size: 18px; margin-top: 4px;" id="fare-display">$0.00</div>
+                  </div>
+                </div>
+                <div class="card-row" style="margin-top: 14px;">
+                  <button type="button" class="btn btn--primary btn--block" data-action="proceed-to-pay" disabled>Proceed to pay</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-inner">
+            <small>Parkwise</small>
+            <small class="mono">User: demo-user</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/slot-selection.js"></script>
+  </body>
+</html>

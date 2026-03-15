@@ -71,7 +71,7 @@
                         <th>Status</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody data-vehicle-list>
                       <tr>
                         <td class="mono">AB-123-CD</td>
                         <td>Daily</td>
@@ -92,20 +92,20 @@
               <div class="card" style="grid-column: span 5;">
                 <div class="card-body">
                   <h2 class="card-title">Add vehicle</h2>
-                  <p class="card-meta">Form is present, but submit is disabled.</p>
-                  <form class="form">
+                  <p class="card-meta">Add a vehicle to use when booking.</p>
+                  <form class="form" data-form="add-vehicle" action="#" method="post">
                     <div class="field">
                       <label for="plate">Plate number</label>
-                      <input id="plate" class="control" type="text" placeholder="AB-123-CD" />
+                      <input id="plate" name="plate" class="control" type="text" placeholder="AB-123-CD" required />
                     </div>
                     <div class="form-row">
                       <div class="field">
                         <label for="nickname">Nickname</label>
-                        <input id="nickname" class="control" type="text" placeholder="Daily" />
+                        <input id="nickname" name="nickname" class="control" type="text" placeholder="Daily" />
                       </div>
                       <div class="field">
                         <label for="type">Type</label>
-                        <select id="type" class="control">
+                        <select id="type" name="type" class="control">
                           <option>Sedan</option>
                           <option>SUV</option>
                           <option>Hatchback</option>
@@ -113,7 +113,7 @@
                         </select>
                       </div>
                     </div>
-                    <button class="btn btn--block btn--primary" type="button" disabled>Add vehicle</button>
+                    <button class="btn btn--block btn--primary" type="submit">Add vehicle</button>
                   </form>
                 </div>
               </div>
@@ -131,5 +131,6 @@
         </div>
       </footer>
     </div>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

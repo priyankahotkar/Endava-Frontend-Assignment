@@ -75,31 +75,7 @@
                       <th>Total</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td><span class="badge badge--success">Active</span></td>
-                      <td>Central Plaza Garage</td>
-                      <td class="mono">AB-123-CD</td>
-                      <td>Today 10:00</td>
-                      <td>Today 13:00</td>
-                      <td>$10.50</td>
-                    </tr>
-                    <tr>
-                      <td><span class="badge badge--warning">Past</span></td>
-                      <td>Riverside Lot</td>
-                      <td class="mono">XY-900-ZZ</td>
-                      <td>Mar 02 09:30</td>
-                      <td>Mar 02 17:00</td>
-                      <td>$12.00</td>
-                    </tr>
-                    <tr>
-                      <td><span class="badge badge--warning">Past</span></td>
-                      <td>Airport Long Stay</td>
-                      <td class="mono">AB-123-CD</td>
-                      <td>Feb 21 05:15</td>
-                      <td>Feb 23 08:10</td>
-                      <td>$36.00</td>
-                    </tr>
+                  <tbody data-bookings-list>
                   </tbody>
                 </table>
               </div>
@@ -114,14 +90,14 @@
                 <div class="card-body">
                   <h3 class="card-title">Extend booking</h3>
                   <p class="card-meta">Add time to your active booking.</p>
-                  <button class="btn btn--block btn--ghost" type="button" disabled>Extend</button>
+                  <button class="btn btn--block btn--ghost" type="button" data-action="extend-booking">Extend</button>
                 </div>
               </div>
               <div class="card" style="grid-column: span 6;">
                 <div class="card-body">
                   <h3 class="card-title">Cancel booking</h3>
                   <p class="card-meta">Cancellation rules vary by lot.</p>
-                  <button class="btn btn--block btn--danger" type="button" disabled>Cancel</button>
+                  <button class="btn btn--block btn--danger" type="button" data-action="cancel-booking">Cancel</button>
                 </div>
               </div>
             </div>
@@ -138,5 +114,6 @@
         </div>
       </footer>
     </div>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>
