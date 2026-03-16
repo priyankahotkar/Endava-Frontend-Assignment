@@ -1,4 +1,11 @@
-import { getSelectedLot, getSelectedSlot, addBooking, clearBookingDraft } from "./lib/storage.js";
+import {
+  getSelectedLot,
+  getSelectedSlot,
+  addBooking,
+  clearBookingDraft,
+  addPayment,
+  addInvoice,
+} from "./lib/storage.js";
 
 function getTodayTime(offsetHours) {
   const d = new Date();
@@ -57,16 +64,36 @@ function initPaymentPage() {
       const startTime = getTodayTime(0);
       const endTime = getTodayTime(slot.durationHours || 3);
       const dateLabel = getTodayLabel();
+      const amount = slot.fare || "0.00";
 
-      addBooking({
+      const bookingId = addBooking({
         lotName: lot.name,
         slotType: slot.slotType,
         slotNumber: slot.slotNumber,
         vehiclePlate: "AB-123-CD",
         start: `${dateLabel} ${startTime}`,
         end: `${dateLabel} ${endTime}`,
-        total: `$${slot.fare || "0.00"}`,
+        total: `$${amount}`,
         status: "Active",
+      });
+
+      const payment = addPayment({
+        bookingId,
+        lotName: lot.name,
+        amount: `$${amount}`,
+        method: "Card",
+        status: "Success",
+        paidAt: `${dateLabel} ${getTodayTime(0)}`,
+        cardLast4: cardNumber.slice(-4),
+      });
+
+      addInvoice({
+        bookingId,
+        paymentId: payment.id,
+        lotName: lot.name,
+        amount: `$${amount}`,
+        status: "Paid",
+        date: dateLabel,
       });
 
       clearBookingDraft();

@@ -67,8 +67,16 @@
                 <table class="table" aria-label="Bookings table">
                   <thead>
                     <tr>
+                      <th>
+                        <input
+                          type="checkbox"
+                          aria-label="Select all active bookings"
+                          data-action="select-all-active-bookings"
+                        />
+                      </th>
                       <th>Status</th>
                       <th>Lot</th>
+                      <th>Slot</th>
                       <th>Vehicle</th>
                       <th>Start</th>
                       <th>End</th>
@@ -96,8 +104,8 @@
               <div class="card" style="grid-column: span 6;">
                 <div class="card-body">
                   <h3 class="card-title">Cancel booking</h3>
-                  <p class="card-meta">Cancellation rules vary by lot.</p>
-                  <button class="btn btn--block btn--danger" type="button" data-action="cancel-booking">Cancel</button>
+                  <p class="card-meta">Select one or more active bookings to cancel.</p>
+                  <button class="btn btn--block btn--danger" type="button" data-action="cancel-booking">Cancel selected</button>
                 </div>
               </div>
             </div>

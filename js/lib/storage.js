@@ -69,3 +69,71 @@ export function clearBookingDraft() {
   sessionStorage.removeItem(SELECTED_LOT_KEY);
   sessionStorage.removeItem(SELECTED_SLOT_KEY);
 }
+
+const USER_LOCATION_KEY = "parkwise_user_location_v1";
+
+export function getUserLocation() {
+  try {
+    const raw = localStorage.getItem(USER_LOCATION_KEY);
+    if (!raw) return null;
+    const value = JSON.parse(raw);
+    if (!value || typeof value.lat !== "number" || typeof value.lng !== "number") return null;
+    return value;
+  } catch {
+    return null;
+  }
+}
+
+export function setUserLocation(location) {
+  const lat = Number(location?.lat);
+  const lng = Number(location?.lng);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+  localStorage.setItem(USER_LOCATION_KEY, JSON.stringify({ lat, lng, savedAt: Date.now() }));
+}
+
+export function clearUserLocation() {
+  localStorage.removeItem(USER_LOCATION_KEY);
+}
+
+const PAYMENTS_KEY = "parkwise_payments_v1";
+const INVOICES_KEY = "parkwise_invoices_v1";
+
+export function getPayments() {
+  try {
+    const raw = localStorage.getItem(PAYMENTS_KEY);
+    if (!raw) return [];
+    const list = JSON.parse(raw);
+    return Array.isArray(list) ? list : [];
+  } catch {
+    return [];
+  }
+}
+
+export function addPayment(payment) {
+  const list = getPayments();
+  const id = "p" + Date.now();
+  const entry = { id, ...payment };
+  list.unshift(entry);
+  localStorage.setItem(PAYMENTS_KEY, JSON.stringify(list));
+  return entry;
+}
+
+export function getInvoices() {
+  try {
+    const raw = localStorage.getItem(INVOICES_KEY);
+    if (!raw) return [];
+    const list = JSON.parse(raw);
+    return Array.isArray(list) ? list : [];
+  } catch {
+    return [];
+  }
+}
+
+export function addInvoice(invoice) {
+  const list = getInvoices();
+  const id = "inv-" + Date.now();
+  const entry = { id, ...invoice };
+  list.unshift(entry);
+  localStorage.setItem(INVOICES_KEY, JSON.stringify(list));
+  return entry;
+}

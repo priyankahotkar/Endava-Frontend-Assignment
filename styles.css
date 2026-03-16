@@ -387,6 +387,14 @@ main{
   border: 1px solid rgba(2, 6, 23, .10);
   background: rgba(2, 6, 23, .03);
 }
+
+/* Ensure selected slot styling wins over generic .pill styling */
+.slot-option.slot-option--selected{
+  border-color: var(--brand);
+  background: rgba(11,87,208,.10);
+  color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(11,87,208,.18);
+}
 .dot{
   width: 7px;
   height: 7px;

@@ -26,9 +26,16 @@ function renderSlots(slots) {
     btn.setAttribute("data-slot-number", slot.number);
     btn.setAttribute("data-slot-type", slot.type);
     btn.textContent = slot.number;
-    btn.addEventListener("click", () => selectSlot(slot));
     container.appendChild(btn);
   });
+}
+
+function getSlotFromButton(button) {
+  return {
+    id: button.getAttribute("data-slot-id"),
+    number: button.getAttribute("data-slot-number"),
+    type: button.getAttribute("data-slot-type"),
+  };
 }
 
 function selectSlot(slot) {
@@ -72,6 +79,15 @@ function initPage() {
 
   const slots = getSlotsForLot(selectedLot.id, currentVehicleType);
   renderSlots(slots);
+
+  const slotList = document.querySelector(SLOT_LIST_SELECTOR);
+  if (slotList) {
+    slotList.addEventListener("click", (e) => {
+      const button = e.target.closest(".slot-option");
+      if (!button) return;
+      selectSlot(getSlotFromButton(button));
+    });
+  }
 
   queryAll(VEHICLE_TYPE_BTNS).forEach((btn) => {
     btn.addEventListener("click", () => {

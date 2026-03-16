@@ -19,6 +19,18 @@ function statusBadgeClass(status) {
   return "badge badge--warning";
 }
 
+function selectionCell(booking) {
+  if (booking.status !== "Active") return "<td></td>";
+  return `<td>
+    <input
+      type="checkbox"
+      data-booking-select
+      data-booking-id="${escapeHtml(booking.id)}"
+      aria-label="Select booking ${escapeHtml(booking.id)}"
+    />
+  </td>`;
+}
+
 function renderBookings(root = document) {
   const tbody = root.querySelector(BOOKINGS_LIST_SELECTOR);
   if (!tbody) return;
@@ -28,8 +40,10 @@ function renderBookings(root = document) {
     .map(
       (b) =>
         `<tr>
+          ${selectionCell(b)}
           <td><span class="${statusBadgeClass(b.status)}">${escapeHtml(b.status)}</span></td>
           <td>${escapeHtml(b.lotName)}</td>
+          <td>${escapeHtml([b.slotType, b.slotNumber].filter(Boolean).join(" · ") || "—")}</td>
           <td class="mono">${escapeHtml(b.vehiclePlate || "—")}</td>
           <td>${escapeHtml(b.start)}</td>
           <td>${escapeHtml(b.end)}</td>

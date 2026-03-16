@@ -2,6 +2,7 @@ import { query, on } from "../lib/dom.js";
 import { show as showModal } from "./modal.js";
 import { emit } from "../lib/events.js";
 import { TOAST_EVENT } from "./toast.js";
+import { getInvoices, getPayments } from "../lib/storage.js";
 
 const BUTTON_SELECTOR = "[data-action=\"update-payment\"]";
 
@@ -17,6 +18,50 @@ const PAYMENT_FORM_HTML = `
     </div>
   </form>
 `;
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function renderInvoices(root = document) {
+  const tbody = root.querySelector("[data-invoices-list]");
+  if (!tbody) return;
+  const invoices = getInvoices();
+  tbody.innerHTML = invoices
+    .map(
+      (inv) =>
+        `<tr>
+          <td class="mono">${escapeHtml(inv.id || "")}</td>
+          <td>${escapeHtml(inv.date || "")}</td>
+          <td>${escapeHtml(inv.amount || "")}</td>
+          <td><span class="badge badge--${inv.status === "Paid" ? "success" : "warning"}">${escapeHtml(
+            inv.status || ""
+          )}</span></td>
+        </tr>`
+    )
+    .join("");
+}
+
+function renderLatestPaymentSummary(root = document) {
+  const summary = root.querySelector("[data-payment-summary]");
+  if (!summary) return;
+  const payments = getPayments();
+  if (!payments.length) {
+    summary.innerHTML = `
+      <div style="font-weight: 800;">Card ending —</div>
+      <div>Expires —</div>
+    `;
+    return;
+  }
+  const latest = payments[0];
+  const last4 = latest.cardLast4 || "—";
+  summary.innerHTML = `
+    <div style="font-weight: 800;">Card ending ${escapeHtml(last4)}</div>
+    <div>${escapeHtml(latest.paidAt || "")}</div>
+  `;
+}
 
 function handleUpdatePaymentClick(event) {
   const button = event.target.closest(BUTTON_SELECTOR);
@@ -42,7 +87,8 @@ function handleUpdatePaymentClick(event) {
 }
 
 export function init(root = document) {
+  renderInvoices(root);
+  renderLatestPaymentSummary(root);
   const button = root.querySelector(BUTTON_SELECTOR);
-  if (!button) return;
-  on(button, "click", handleUpdatePaymentClick);
+  if (button) on(button, "click", handleUpdatePaymentClick);
 }

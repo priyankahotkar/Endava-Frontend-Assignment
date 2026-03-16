@@ -75,25 +75,7 @@
                         <th>Status</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td class="mono">INV-2026-0310</td>
-                        <td>Mar 10</td>
-                        <td>$10.50</td>
-                        <td><span class="badge badge--success">Paid</span></td>
-                      </tr>
-                      <tr>
-                        <td class="mono">INV-2026-0302</td>
-                        <td>Mar 02</td>
-                        <td>$12.00</td>
-                        <td><span class="badge badge--success">Paid</span></td>
-                      </tr>
-                      <tr>
-                        <td class="mono">INV-2026-0223</td>
-                        <td>Feb 23</td>
-                        <td>$36.00</td>
-                        <td><span class="badge badge--warning">Pending</span></td>
-                      </tr>
+                    <tbody data-invoices-list>
                     </tbody>
                   </table>
                 </div>
@@ -103,9 +85,9 @@
                 <div class="card-body">
                   <h2 class="card-title">Payment method</h2>
                   <p class="card-meta">Shown for layout only.</p>
-                  <div class="empty">
-                    <div style="font-weight: 800;">Card ending 4242</div>
-                    <div>Expires 09/28</div>
+                  <div class="empty" data-payment-summary>
+                    <div style="font-weight: 800;">Card ending —</div>
+                    <div>Expires —</div>
                   </div>
                   <div class="card-row">
                     <button class="btn btn--block btn--primary" type="button" data-action="update-payment">Update method</button>

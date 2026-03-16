@@ -1,5 +1,5 @@
 import { query, queryAll, on } from "../lib/dom.js";
-import { setSelectedLot } from "../lib/storage.js";
+import { getUserLocation, setUserLocation, setSelectedLot } from "../lib/storage.js";
 import { distanceKm } from "../data/lots.js";
 import { emit } from "../lib/events.js";
 import { TOAST_EVENT } from "./toast.js";
@@ -44,12 +44,7 @@ function sortCardsByDistance(grid, userLat, userLng) {
   });
 }
 
-function handleUseLocation(event) {
-  const btn = event.target.closest(USE_LOCATION_SELECTOR);
-  if (!btn) return;
-  const grid = query(GRID_SELECTOR, btn.closest(".app-shell") || document);
-  if (!grid) return;
-
+function requestAndStoreLocation({ grid, btn, onSuccessLabel }) {
   btn.disabled = true;
   btn.textContent = "Locating…";
 
@@ -62,16 +57,28 @@ function handleUseLocation(event) {
 
   navigator.geolocation.getCurrentPosition(
     (pos) => {
-      sortCardsByDistance(grid, pos.coords.latitude, pos.coords.longitude);
-      emit(TOAST_EVENT, { message: "Sorted by distance from you.", type: "success" });
-      btn.textContent = "Sorted";
+      const loc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      setUserLocation(loc);
+      sortCardsByDistance(grid, loc.lat, loc.lng);
+      emit(TOAST_EVENT, { message: "Nearest lots loaded for your location.", type: "success" });
+      btn.disabled = false;
+      btn.textContent = onSuccessLabel || "Update location";
     },
     () => {
-      emit(TOAST_EVENT, { message: "Could not get location. Showing default order.", type: "info" });
+      emit(TOAST_EVENT, { message: "Location permission denied. Showing default order.", type: "info" });
       btn.disabled = false;
       btn.textContent = "Use my location";
     }
   );
+}
+
+function handleUseLocation(event) {
+  const btn = event.target.closest(USE_LOCATION_SELECTOR);
+  if (!btn) return;
+  const grid = query(GRID_SELECTOR, btn.closest(".app-shell") || document);
+  if (!grid) return;
+
+  requestAndStoreLocation({ grid, btn, onSuccessLabel: "Update location" });
 }
 
 function handleBookHere(event) {
@@ -92,6 +99,14 @@ export function init(root = document) {
   if (useLocationBtn) on(useLocationBtn, "click", handleUseLocation);
 
   if (grid) {
+    const saved = getUserLocation();
+    if (saved?.lat && saved?.lng) {
+      sortCardsByDistance(grid, saved.lat, saved.lng);
+      if (useLocationBtn) useLocationBtn.textContent = "Update location";
+    } else if (useLocationBtn) {
+      requestAndStoreLocation({ grid, btn: useLocationBtn, onSuccessLabel: "Update location" });
+    }
+
     grid.querySelectorAll(BOOK_HERE_SELECTOR).forEach((el) => {
       on(el, "click", handleBookHere);
     });
