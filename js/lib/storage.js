@@ -137,3 +137,30 @@ export function addInvoice(invoice) {
   localStorage.setItem(INVOICES_KEY, JSON.stringify(list));
   return entry;
 }
+// --- Vehicles Storage ---
+const VEHICLES_KEY = "parkwise_vehicles_v1";
+const SEED_VEHICLES = [
+  { plate: "AB-123-CD", nickname: "Daily", type: "Sedan", status: "Default" },
+  { plate: "XY-900-ZZ", nickname: "Weekend", type: "SUV", status: "Secondary" },
+];
+
+export function getVehicles() {
+  try {
+    const raw = localStorage.getItem(VEHICLES_KEY);
+    if (!raw) return [...SEED_VEHICLES];
+    const list = JSON.parse(raw);
+    return Array.isArray(list) ? list : [...SEED_VEHICLES];
+  } catch {
+    return [...SEED_VEHICLES];
+  }
+}
+
+export function saveVehicles(list) {
+  localStorage.setItem(VEHICLES_KEY, JSON.stringify(list));
+}
+
+export function addVehicle(vehicle) {
+  const list = getVehicles();
+  list.unshift(vehicle);
+  saveVehicles(list);
+}

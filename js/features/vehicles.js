@@ -1,6 +1,7 @@
 import { query, on } from "../lib/dom.js";
 import { emit } from "../lib/events.js";
 import { TOAST_EVENT } from "./toast.js";
+import { getVehicles, addVehicle } from "../lib/storage.js";
 
 const FORM_SELECTOR = "[data-form=\"add-vehicle\"]";
 const LIST_SELECTOR = "[data-vehicle-list]";
@@ -23,12 +24,19 @@ function buildTableRow(vehicle) {
   const plate = (vehicle.plate || "").trim();
   const nickname = (vehicle.nickname || "").trim() || "—";
   const type = vehicle.type || "—";
+  let status = vehicle.status || "New";
+
+  let badgeClass = "badge--warning";
+  if (status === "Default") badgeClass = "badge--success";
+  else if (status === "Secondary") badgeClass = "badge--warning";
+
   tr.innerHTML = `
     <td class="mono">${escapeHtml(plate)}</td>
     <td>${escapeHtml(nickname)}</td>
     <td>${escapeHtml(type)}</td>
-    <td><span class="badge badge--warning">New</span></td>
+    <td><span class="badge ${badgeClass}">${escapeHtml(status)}</span></td>
   `;
+
   return tr;
 }
 
@@ -45,23 +53,45 @@ function handleSubmit(event) {
   if (!list) return;
 
   const data = getFormData(form);
+
   if (!validatePlate(data.plate)) {
     emit(TOAST_EVENT, { message: "Please enter a plate number.", type: "error" });
     return;
   }
 
-  const row = buildTableRow({
+  // Save to local storage
+  addVehicle({
     plate: data.plate,
     nickname: data.nickname,
     type: data.type,
+    status: "New"
   });
-  list.appendChild(row);
+
+  // Re-render list
+  renderVehicleList(list);
   form.reset();
+
   emit(TOAST_EVENT, { message: "Vehicle added.", type: "success" });
+}
+
+function renderVehicleList(listElem) {
+  const vehicles = getVehicles();
+  listElem.innerHTML = "";
+
+  vehicles.forEach(vehicle => {
+    listElem.appendChild(buildTableRow(vehicle));
+  });
 }
 
 export function init(root = document) {
   const form = root.querySelector(FORM_SELECTOR);
-  if (!form) return;
-  on(form, "submit", handleSubmit);
+  const list = root.querySelector(LIST_SELECTOR);
+
+  if (list) {
+    renderVehicleList(list);
+  }
+
+  if (form) {
+    on(form, "submit", handleSubmit);
+  }
 }
