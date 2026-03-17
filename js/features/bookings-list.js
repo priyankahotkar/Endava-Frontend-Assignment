@@ -5,7 +5,10 @@ import { emit } from "../lib/events.js";
 import { TOAST_EVENT } from "./toast.js";
 
 const BOOKINGS_LIST_SELECTOR = "[data-bookings-list]";
+const BOOKINGS_SEARCH_SELECTOR = "[data-bookings-search]";
 const BOOKINGS_UPDATED_EVENT = "parkwise:bookings-updated";
+
+let currentSearchTerm = "";
 
 function escapeHtml(text) {
   const div = document.createElement("div");
@@ -31,12 +34,45 @@ function selectionCell(booking) {
   </td>`;
 }
 
-function renderBookings(root = document) {
+function filterBookings(bookings, searchTerm) {
+  if (!searchTerm.trim()) return bookings;
+  
+  const term = searchTerm.toLowerCase().trim();
+  return bookings.filter(booking => {
+    const searchableText = [
+      booking.lotName,
+      booking.vehiclePlate,
+      booking.status,
+      booking.slotType,
+      booking.slotNumber,
+      booking.start,
+      booking.end,
+      booking.total
+    ].filter(Boolean).join(' ').toLowerCase();
+    
+    return searchableText.includes(term);
+  });
+}
+
+function updateBadgeCounts(root = document, bookings) {
+  const activeCount = bookings.filter(b => b.status === "Active").length;
+  const pastCount = bookings.filter(b => b.status !== "Active").length;
+  
+  const activeBadge = root.querySelector('.badge--success');
+  const pastBadge = root.querySelector('.badge--warning');
+  
+  if (activeBadge) activeBadge.textContent = `${activeCount} active`;
+  if (pastBadge) pastBadge.textContent = `${pastCount} past`;
+}
+
+function renderBookings(root = document, searchTerm = "") {
   const tbody = root.querySelector(BOOKINGS_LIST_SELECTOR);
   if (!tbody) return;
 
-  const list = getBookings();
-  tbody.innerHTML = list
+  const allBookings = getBookings();
+  const filteredBookings = filterBookings(allBookings, searchTerm);
+  
+  tbody.innerHTML = filteredBookings
     .map(
       (b) =>
         `<tr>
@@ -51,6 +87,8 @@ function renderBookings(root = document) {
         </tr>`
     )
     .join("");
+    
+  updateBadgeCounts(root, filteredBookings);
 }
 
 function showPaidToast() {
@@ -61,10 +99,21 @@ function showPaidToast() {
   }
 }
 
+function handleSearchInput(root = document) {
+  const searchInput = root.querySelector(BOOKINGS_SEARCH_SELECTOR);
+  if (!searchInput) return;
+
+  searchInput.addEventListener('input', (e) => {
+    currentSearchTerm = e.target.value;
+    renderBookings(root, currentSearchTerm);
+  });
+}
+
 export function init(root = document) {
-  renderBookings(root);
+  renderBookings(root, currentSearchTerm);
+  handleSearchInput(root);
   showPaidToast();
-  subscribe(BOOKINGS_UPDATED_EVENT, () => renderBookings(root));
+  subscribe(BOOKINGS_UPDATED_EVENT, () => renderBookings(root, currentSearchTerm));
 }
 
 export { BOOKINGS_UPDATED_EVENT };

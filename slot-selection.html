@@ -37,18 +37,67 @@
               <p class="section-sub" id="slot-selection-lot-address"></p>
             </div>
 
-            <div class="card" style="margin-bottom: 18px;">
+            <div class="card margin-bottom-18">
               <div class="card-body">
-                <h2 class="card-title">Vehicle type</h2>
-                <div class="pill-row" data-vehicle-types role="tablist">
-                  <button type="button" class="pill slot-type-btn" data-vehicle-type="Car" role="tab" aria-selected="true">Car</button>
-                  <button type="button" class="pill slot-type-btn" data-vehicle-type="Bike" role="tab" aria-selected="false">Bike</button>
-                  <button type="button" class="pill slot-type-btn" data-vehicle-type="EV" role="tab" aria-selected="false">EV</button>
+                <h2 class="card-title">Select your vehicle</h2>
+                <p class="card-meta">Choose how you want to select your vehicle.</p>
+                
+                <div class="form" data-vehicle-selection-mode>
+                  <div class="field">
+                    <label class="control-radio">
+                      <input type="radio" name="vehicle-selection-mode" value="quick" checked>
+                      <span class="radio-mark"></span>
+                      <span class="radio-label">Quick selection - Choose vehicle type</span>
+                    </label>
+                  </div>
+                  <div class="field">
+                    <label class="control-radio">
+                      <input type="radio" name="vehicle-selection-mode" value="saved">
+                      <span class="radio-mark"></span>
+                      <span class="radio-label">Select from my saved vehicles</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form margin-top-16" data-quick-selection>
+                  <div class="form-row">
+                    <div class="field">
+                      <label for="vehicle-type">Vehicle type</label>
+                      <select id="vehicle-type" name="vehicle-type" class="control" data-vehicle-type-select>
+                        <option value="Car">Car</option>
+                        <option value="Bike">Bike</option>
+                        <option value="EV">EV</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="field">
+                      <label for="quick-plate">License plate (optional)</label>
+                      <input type="text" id="quick-plate" name="quick-plate" class="control" placeholder="e.g. AB-123-CD" data-quick-plate>
+                    </div>
+                    <div class="field">
+                      <label for="quick-nickname">Nickname (optional)</label>
+                      <input type="text" id="quick-nickname" name="quick-nickname" class="control" placeholder="e.g. My Red Car" data-quick-nickname>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form margin-top-16 display-none" data-saved-vehicles>
+                  <div class="field">
+                    <label for="saved-vehicle-select">Select vehicle</label>
+                    <select id="saved-vehicle-select" name="saved-vehicle-select" class="control" data-saved-vehicle-select>
+                      <option value="">Choose a vehicle...</option>
+                      <!-- Saved vehicles will be populated by JS -->
+                    </select>
+                  </div>
+                  <p class="card-meta margin-top-8">
+                    <a href="./vehicles.html" class="btn btn--small btn--ghost">Add new vehicle</a>
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div class="card" style="margin-bottom: 18px;">
+            <div class="card margin-bottom-18">
               <div class="card-body">
                 <h2 class="card-title">Available slots</h2>
                 <p class="card-meta">Select a slot for your vehicle type.</p>
@@ -56,7 +105,7 @@
               </div>
             </div>
 
-            <div class="card" style="margin-bottom: 18px;">
+            <div class="card margin-bottom-18">
               <div class="card-body">
                 <h2 class="card-title">Duration &amp; fare</h2>
                 <div class="form-row">
@@ -72,10 +121,10 @@
                   </div>
                   <div class="field">
                     <label>Total fare</label>
-                    <div class="mono" style="font-size: 18px; margin-top: 4px;" id="fare-display">$0.00</div>
+                    <div class="mono fare-display" id="fare-display">$0.00</div>
                   </div>
                 </div>
-                <div class="card-row" style="margin-top: 14px;">
+                <div class="card-row margin-top-14">
                   <button type="button" class="btn btn--primary btn--block" data-action="proceed-to-pay" disabled>Proceed to pay</button>
                 </div>
               </div>

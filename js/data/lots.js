@@ -17,8 +17,8 @@ export function getSlotsForLot(lotId, vehicleType) {
   }));
 }
 
-function toRad(deg) {
-  return (deg * Math.PI) / 180;
+function toRad(degrees) {
+  return degrees * (Math.PI / 180);
 }
 
 export function distanceKm(lat1, lng1, lat2, lng2) {
@@ -30,4 +30,17 @@ export function distanceKm(lat1, lng1, lat2, lng2) {
     Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return Math.round(R * c * 10) / 10;
+}
+
+// Map vehicle types from vehicles to slot types
+export function getSlotTypeForVehicle(vehicleType) {
+  const typeMap = {
+    'Sedan': 'Car',
+    'SUV': 'Car',
+    'Hatchback': 'Car',
+    'Motorcycle': 'Bike',
+    'Truck': 'Car', // Assuming trucks use car slots
+    'Van': 'Car'
+  };
+  return typeMap[vehicleType] || 'Car'; // Default to Car if unknown type
 }
