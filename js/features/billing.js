@@ -50,7 +50,7 @@ function renderLatestPaymentSummary(root = document) {
   const payments = getPayments();
   if (!payments.length) {
     summary.innerHTML = `
-      <div style="font-weight: 800;">Card ending —</div>
+      <div class="payment-summary-title">Card ending —</div>
       <div>Expires —</div>
     `;
     return;
@@ -58,7 +58,7 @@ function renderLatestPaymentSummary(root = document) {
   const latest = payments[0];
   const last4 = latest.cardLast4 || "—";
   summary.innerHTML = `
-    <div style="font-weight: 800;">Card ending ${escapeHtml(last4)}</div>
+    <div class="payment-summary-title">Card ending ${escapeHtml(last4)}</div>
     <div>${escapeHtml(latest.paidAt || "")}</div>
   `;
 }

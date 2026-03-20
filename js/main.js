@@ -6,6 +6,7 @@ import { init as initBookingsActions } from "./features/bookings-actions.js";
 import { init as initBilling } from "./features/billing.js";
 import { init as initLotsFlow } from "./features/lots-flow.js";
 import { init as initBookingsList } from "./features/bookings-list.js";
+import { initAuthNav } from "./lib/auth.js";
 
 function runWhenReady(fn) {
   if (document.readyState === "loading") {
@@ -18,6 +19,7 @@ function runWhenReady(fn) {
 runWhenReady(() => {
   const root = document.body;
   initNavigation(root);
+  initAuthNav();
   initToast();
   initVehicles(root);
   initLotBooking(root);

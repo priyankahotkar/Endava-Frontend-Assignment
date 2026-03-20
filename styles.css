@@ -338,6 +338,10 @@ main{
 .payment-summary dt{ color: var(--muted); font-weight: 600; }
 .payment-summary dd{ margin: 0; }
 .payment-summary .payment-total{ font-size: 16px; font-weight: 700; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+
+.payment-summary-title {
+  font-weight: 800;
+}
 .payment-form-card{ max-width: 420px; }
 .card-title{
   margin: 0 0 6px;
@@ -459,6 +463,27 @@ main{
 .fare-display{
   font-size: 18px;
   margin-top: 4px;
+}
+
+.auth-status{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-name{
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.auth-link{
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.auth-link:hover{
+  text-decoration: underline;
 }
 
 .form{
