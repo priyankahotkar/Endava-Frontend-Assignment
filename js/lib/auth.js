@@ -161,7 +161,8 @@ export function initLoginForm() {
   function setMessage(text, isError = true) {
     if (!message) return;
     message.textContent = text || "";
-    message.style.color = isError ? "var(--danger)" : "var(--success)";
+    message.classList.toggle("text-error", isError);
+    message.classList.toggle("text-success", !isError);
   }
 
   form.addEventListener("submit", (e) => {
@@ -195,7 +196,8 @@ export function initSignupForm() {
   function setMessage(text, isError = true) {
     if (!message) return;
     message.textContent = text || "";
-    message.style.color = isError ? "var(--danger)" : "var(--success)";
+    message.classList.toggle("text-error", isError);
+    message.classList.toggle("text-success", !isError);
   }
 
   form.addEventListener("submit", (e) => {

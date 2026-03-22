@@ -27,7 +27,16 @@ function createModal(config) {
   const titleEl = document.createElement("h3");
   titleEl.id = "modal-title";
   titleEl.textContent = title;
+  
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.className = "btn modal-close-btn";
+  closeBtn.setAttribute("aria-label", "Close modal");
+  closeBtn.innerHTML = "×";
+  closeBtn.addEventListener("click", () => close());
+  
   head.appendChild(titleEl);
+  head.appendChild(closeBtn);
 
   const bodyEl = document.createElement("div");
   bodyEl.className = "modal-body";

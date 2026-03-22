@@ -75,11 +75,11 @@ function toggleSelectionMode() {
   const savedSection = document.querySelector(SAVED_VEHICLES_SELECTOR);
   
   if (selectionMode === "quick") {
-    quickSection.style.display = "block";
-    savedSection.style.display = "none";
+    quickSection.classList.remove("is-hidden");
+    savedSection.classList.add("is-hidden");
   } else {
-    quickSection.style.display = "none";
-    savedSection.style.display = "block";
+    quickSection.classList.add("is-hidden");
+    savedSection.classList.remove("is-hidden");
   }
 }
 

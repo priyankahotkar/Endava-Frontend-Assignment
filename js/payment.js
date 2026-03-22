@@ -15,10 +15,22 @@ function getTodayTime(offsetHours) {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
-function getTodayLabel() {
+function getDateLabel() {
   const d = new Date();
+  const year = d.getFullYear();
   const mon = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][d.getMonth()];
-  return `Today ${d.getDate()} ${mon}`;
+  const date = d.getDate();
+  return `${date} ${mon} ${year}`;
+}
+
+function getFormattedDateTime(dateStr, timeStr) {
+  const today = new Date();
+  const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+  
+  if (dateStr === todayStr) {
+    return `Today ${timeStr}`;
+  }
+  return `${dateStr} ${timeStr}`;
 }
 
 function initPaymentPage() {
@@ -63,7 +75,7 @@ function initPaymentPage() {
     setTimeout(() => {
       const startTime = getTodayTime(0);
       const endTime = getTodayTime(slot.durationHours || 3);
-      const dateLabel = getTodayLabel();
+      const dateStr = getDateLabel();
       const amount = slot.fare || "0.00";
 
       const bookingId = addBooking({
@@ -71,8 +83,9 @@ function initPaymentPage() {
         slotType: slot.slotType,
         slotNumber: slot.slotNumber,
         vehiclePlate: "AB-123-CD",
-        start: `${dateLabel} ${startTime}`,
-        end: `${dateLabel} ${endTime}`,
+        start: `${dateStr} ${startTime}`,
+        end: `${dateStr} ${endTime}`,
+        startDate: dateStr,
         total: `$${amount}`,
         status: "Active",
       });
@@ -83,7 +96,7 @@ function initPaymentPage() {
         amount: `$${amount}`,
         method: "Card",
         status: "Success",
-        paidAt: `${dateLabel} ${getTodayTime(0)}`,
+        paidAt: `${dateStr} ${getTodayTime(0)}`,
         cardLast4: cardNumber.slice(-4),
       });
 
@@ -93,7 +106,7 @@ function initPaymentPage() {
         lotName: lot.name,
         amount: `$${amount}`,
         status: "Paid",
-        date: dateLabel,
+        date: dateStr,
       });
 
       clearBookingDraft();

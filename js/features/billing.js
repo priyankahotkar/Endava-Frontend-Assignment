@@ -25,6 +25,148 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+function formatDateDisplay(dateStr) {
+  if (!dateStr) return "";
+  
+  // Handle different date formats:
+  // 1. "17 Mar 2026" (new format: day month year)
+  // 2. "Today" (current day format)
+  // 3. "Today 17 Mar" (old format: Today day month)
+  // 4. "Mar 02" (old format: month day, assume current year)
+  
+  const parts = dateStr.split(" ");
+  
+  if (parts.length === 3 && parts[0] === "Today") {
+    // Format: "Today 17 Mar" - old format with Today prefix
+    const day = parts[1];
+    const month = parts[2];
+    const currentYear = new Date().getFullYear();
+    const fullDateStr = `${day} ${month} ${currentYear}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (fullDateStr === todayStr) {
+      return `Today`;
+    }
+    return fullDateStr;
+  } else if (parts.length === 3) {
+    // Format: "17 Mar 2026"
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+    const fullDateStr = `${day} ${month} ${year}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (fullDateStr === todayStr) {
+      return `Today`;
+    }
+    return dateStr;
+  } else if (parts.length === 1 && parts[0] === "Today") {
+    // Format: "Today" - this is already correctly formatted for today
+    return dateStr;
+  } else if (parts.length === 2) {
+    // Format: "Mar 02" - old format, assume current year
+    const month = parts[0];
+    const day = parts[1];
+    const currentYear = new Date().getFullYear();
+    const fullDateStr = `${day} ${month} ${currentYear}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (fullDateStr === todayStr) {
+      return `Today`;
+    }
+    return `${fullDateStr}`;
+  }
+  
+  // Fallback: return as-is
+  return dateStr;
+}
+
+function formatDateTimeDisplay(dateTimeStr) {
+  if (!dateTimeStr) return "";
+  
+  // Handle different date-time formats:
+  // 1. "17 Mar 2026 10:00" (new format: day month year time)
+  // 2. "Today 10:00" (current day format)
+  // 3. "Today 17 Mar 10:00" (old format: Today day month time)
+  // 4. "Today 17 Mar" (old format: Today day month, assume current time)
+  // 5. "Mar 02 09:30" (old format: month day time)
+  
+  const parts = dateTimeStr.split(" ");
+  
+  if (parts.length === 4 && parts[0] === "Today") {
+    // Format: "Today 17 Mar 10:00" - old format with Today prefix
+    const day = parts[1];
+    const month = parts[2];
+    const time = parts[3];
+    const currentYear = new Date().getFullYear();
+    const dateStr = `${day} ${month} ${currentYear}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (dateStr === todayStr) {
+      return `Today ${time}`;
+    }
+    return `${dateStr} ${time}`;
+  } else if (parts.length === 3 && parts[0] === "Today") {
+    // Format: "Today 17 Mar" - old format with Today prefix, no time
+    const day = parts[1];
+    const month = parts[2];
+    const currentYear = new Date().getFullYear();
+    const dateStr = `${day} ${month} ${currentYear}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (dateStr === todayStr) {
+      return `Today`;
+    }
+    return dateStr;
+  } else if (parts.length === 4) {
+    // Format: "17 Mar 2026 10:00" - new format
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+    const time = parts[3];
+    const dateStr = `${day} ${month} ${year}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (dateStr === todayStr) {
+      return `Today ${time}`;
+    }
+    return dateTimeStr;
+  } else if (parts.length === 2 && parts[0] === "Today") {
+    // Format: "Today 10:00" - this is already correctly formatted for today
+    return dateTimeStr;
+  } else if (parts.length === 3) {
+    // Format: "Mar 02 09:30" - old format, assume current year
+    const month = parts[0];
+    const day = parts[1];
+    const time = parts[2];
+    const currentYear = new Date().getFullYear();
+    const dateStr = `${day} ${month} ${currentYear}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (dateStr === todayStr) {
+      return `Today ${time}`;
+    }
+    return `${dateStr} ${time}`;
+  }
+  
+  // Fallback: return as-is
+  return dateTimeStr;
+}
+
 function renderInvoices(root = document) {
   const tbody = root.querySelector("[data-invoices-list]");
   if (!tbody) return;
@@ -34,7 +176,7 @@ function renderInvoices(root = document) {
       (inv) =>
         `<tr>
           <td class="mono">${escapeHtml(inv.id || "")}</td>
-          <td>${escapeHtml(inv.date || "")}</td>
+          <td>${escapeHtml(formatDateDisplay(inv.date || ""))}</td>
           <td>${escapeHtml(inv.amount || "")}</td>
           <td><span class="badge badge--${inv.status === "Paid" ? "success" : "warning"}">${escapeHtml(
             inv.status || ""
@@ -59,7 +201,7 @@ function renderLatestPaymentSummary(root = document) {
   const last4 = latest.cardLast4 || "—";
   summary.innerHTML = `
     <div class="payment-summary-title">Card ending ${escapeHtml(last4)}</div>
-    <div>${escapeHtml(latest.paidAt || "")}</div>
+    <div>${escapeHtml(formatDateTimeDisplay(latest.paidAt || ""))}</div>
   `;
 }
 

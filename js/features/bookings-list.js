@@ -16,6 +16,71 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+function formatDateDisplay(dateTimeStr) {
+  if (!dateTimeStr) return "";
+  
+  // Handle different date formats:
+  // 1. "17 Mar 2026 10:00" (new format: day month year time)
+  // 2. "Today 10:00" (current day format)
+  // 3. "Today 17 Mar 10:00" (old format: Today day month time)
+  // 4. "Mar 02 09:30" (old format: month day time)
+  
+  const parts = dateTimeStr.split(" ");
+  
+  if (parts.length === 4 && parts[0] === "Today") {
+    // Format: "Today 17 Mar 10:00" - old format with Today prefix
+    const day = parts[1];
+    const month = parts[2];
+    const time = parts[3];
+    const currentYear = new Date().getFullYear();
+    const dateStr = `${day} ${month} ${currentYear}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (dateStr === todayStr) {
+      return `Today ${time}`;
+    }
+    return `${dateStr} ${time}`;
+  } else if (parts.length === 4) {
+    // Format: "17 Mar 2026 10:00" - new format
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+    const time = parts[3];
+    const dateStr = `${day} ${month} ${year}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (dateStr === todayStr) {
+      return `Today ${time}`;
+    }
+    return dateTimeStr;
+  } else if (parts.length === 2 && parts[0] === "Today") {
+    // Format: "Today 10:00" - this is already correctly formatted for today
+    return dateTimeStr;
+  } else if (parts.length === 3) {
+    // Format: "Mar 02 09:30" - old format, assume current year
+    const month = parts[0];
+    const day = parts[1];
+    const time = parts[2];
+    const currentYear = new Date().getFullYear();
+    const dateStr = `${day} ${month} ${currentYear}`;
+    
+    const today = new Date();
+    const todayStr = `${today.getDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][today.getMonth()]} ${today.getFullYear()}`;
+    
+    if (dateStr === todayStr) {
+      return `Today ${time}`;
+    }
+    return `${dateStr} ${time}`;
+  }
+  
+  // Fallback: return as-is
+  return dateTimeStr;
+}
+
 function statusBadgeClass(status) {
   if (status === "Active") return "badge badge--success";
   if (status === "Cancelled") return "badge badge--danger";
@@ -81,8 +146,8 @@ function renderBookings(root = document, searchTerm = "") {
           <td>${escapeHtml(b.lotName)}</td>
           <td>${escapeHtml([b.slotType, b.slotNumber].filter(Boolean).join(" · ") || "—")}</td>
           <td class="mono">${escapeHtml(b.vehiclePlate || "—")}</td>
-          <td>${escapeHtml(b.start)}</td>
-          <td>${escapeHtml(b.end)}</td>
+          <td>${escapeHtml(formatDateDisplay(b.start))}</td>
+          <td>${escapeHtml(formatDateDisplay(b.end))}</td>
           <td>${escapeHtml(b.total)}</td>
         </tr>`
     )

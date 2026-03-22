@@ -641,6 +641,13 @@ main{
   margin: 0;
   font-size: 15px;
   letter-spacing: -0.02em;
+  flex: 1;
+}
+
+.modal-close-btn{
+  font-size: 24px;
+  padding: 0 8px;
+  flex-shrink: 0;
 }
 .modal-body{ padding: 16px; }
 .modal-foot{
@@ -667,6 +674,14 @@ main{
   background: rgba(180,35,24,.08);
   color: rgba(120,15,10,.98);
 }
+
+/* Visibility utilities */
+.is-hidden{ display: none !important; }
+.is-visible{ display: block !important; }
+
+/* Message color utilities */
+.text-error{ color: var(--danger); }
+.text-success{ color: var(--success); }
 
 @media (max-width: 920px){
   .hero-grid{ grid-template-columns: 1fr; }
