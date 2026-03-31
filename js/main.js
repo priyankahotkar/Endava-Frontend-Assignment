@@ -6,6 +6,7 @@ import { init as initBookingsActions } from "./features/bookings-actions.js";
 import { init as initBilling } from "./features/billing.js";
 import { init as initLotsFlow } from "./features/lots-flow.js";
 import { init as initBookingsList } from "./features/bookings-list.js";
+import { init as initTheme } from "./features/theme.js";
 import { initAuthNav } from "./lib/auth.js";
 
 function runWhenReady(fn) {
@@ -16,15 +17,16 @@ function runWhenReady(fn) {
   }
 }
 
-runWhenReady(() => {
+runWhenReady(async () => {
   const root = document.body;
-  initNavigation(root);
-  initAuthNav();
-  initToast();
-  initVehicles(root);
-  initLotBooking(root);
-  initBookingsActions(root);
-  initBilling(root);
-  initLotsFlow(root);
-  initBookingsList(root);
+  await initNavigation(root);
+  await initAuthNav();
+  await initToast();
+  await initVehicles(root);
+  await initLotBooking(root);
+  await initBookingsActions(root);
+  await initBilling(root);
+  await initLotsFlow(root);
+  await initBookingsList(root);
+  await initTheme(root);
 });

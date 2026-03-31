@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="light dark" />
     <title>Parkwise</title>
     <meta
       name="description"
@@ -122,10 +122,16 @@
           <div class="footer-inner">
             <small>Parkwise</small>
             <small class="mono">User: demo-user</small>
+            <small class="viewport-info" id="viewport-info"></small>
           </div>
         </div>
       </footer>
     </div>
+    <button class="back-to-top" aria-label="Back to top" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4L4 12h5v8h6v-8h5l-8-8z" fill="currentColor"/>
+      </svg>
+    </button>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

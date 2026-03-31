@@ -2,6 +2,7 @@ import { query } from "../lib/dom.js";
 import { getBookings } from "../lib/storage.js";
 import { on as subscribe } from "../lib/events.js";
 import { emit } from "../lib/events.js";
+import { debounce } from "../lib/events.js";
 import { TOAST_EVENT } from "./toast.js";
 
 const BOOKINGS_LIST_SELECTOR = "[data-bookings-list]";
@@ -168,9 +169,14 @@ function handleSearchInput(root = document) {
   const searchInput = root.querySelector(BOOKINGS_SEARCH_SELECTOR);
   if (!searchInput) return;
 
-  searchInput.addEventListener('input', (e) => {
-    currentSearchTerm = e.target.value;
+  // Debounce search to avoid excessive filtering on every keystroke
+  const debouncedSearch = debounce((searchTerm) => {
+    currentSearchTerm = searchTerm;
     renderBookings(root, currentSearchTerm);
+  }, 300); // Wait 300ms after user stops typing
+
+  searchInput.addEventListener('input', (e) => {
+    debouncedSearch(e.target.value);
   });
 }
 

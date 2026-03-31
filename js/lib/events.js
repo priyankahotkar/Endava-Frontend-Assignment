@@ -15,3 +15,28 @@ export function emit(eventName, payload) {
     }
   });
 }
+
+// Debounce function: delays invoking func until after wait milliseconds have elapsed since the last time the debounced function was invoked.
+export function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Throttle function: creates a throttled function that only invokes func at most once per every wait milliseconds.
+export function throttle(func, wait) {
+  let inThrottle;
+  return function executedFunction(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, wait);
+    }
+  };
+}
